@@ -1,5 +1,6 @@
 
-NYTTIGE BEGREBER: | .isEmpty | .count | array.append("x") | array.insert("x", at: index) | array.remove(at: index) | let variabel/constant = array.removeLast() | for item in shoppingList { print(item) } | array.insert("x") | array.remove("x") | array.contains("x") | array.removeAll()
+NYTTIGE BEGREBER: | .isEmpty | .count | array.append("x") | array.insert("x", at: index) | array.remove(at: index) | let variabel/constant = array.removeLast() | for item in shoppingList { print(item) } | array.insert("x") | array.remove("x") | array.contains("x") | .array.removeAll() | .replacingOccurrences(of: "like, ", with: "") | .enumerated
+
 // på mange af dem ovenover som 'removeLast' kan man f.eks skrive | if let nyvariabel = array.removeLast("diller") | bliver nyvariabel's værdi "diller", og "diller" bliver selvfølgelig fjernet, og 'if' statementet er true. Hvis 'array' ikke indeholder "diller" er 'if' statementet false.
 
 
@@ -529,4 +530,106 @@ arithmeticMean(3, 8.25, 18.75)
 // returns 10.0, which is the arithmetic mean of these three numbers
 //NOTE
 //A function may have at most one variadic parame
- Help
+
+
+
+
+
+
+
+
+CLASSES | STRUCTURES
+
+class SomeClass {
+    // class definition goes here
+}
+struct SomeStructure {
+    // structure definition goes here
+}
+
+Here’s an example of a structure definition and a class definition:
+
+struct Resolution {
+    var width = 0
+    var height = 0
+}
+
+class VideoMode {
+    var resolution = Resolution()
+    var interlaced = false
+    var frameRate = 0.0
+    var name: String?
+}
+
+The Resolution structure definition and the VideoMode class definition only describe what a Resolution or VideoMode will look like. They themselves do not describe a specific resolution or video mode. To do that, you need to create an instance of the structure or class.
+
+The syntax for creating instances is very similar for both structures and classes:
+
+
+let someResolution = Resolution()
+let someVideoMode = VideoMode()
+
+
+print("The width of someResolution is \(someResolution.width)")
+// Prints "The width of someResolution is 0"
+In this example, someResolution.width refers to the width property of someResolution, and returns its default initial value of 0.
+
+You can drill down into sub-properties, such as the width property in the resolution property of a VideoMode:
+
+print("The width of someVideoMode is \(someVideoMode.resolution.width)")
+// Prints "The width of someVideoMode is 0"
+You can also use dot syntax to assign a new value to a variable property:
+
+
+someVideoMode.resolution.width = 1280
+print("The width of someVideoMode is now \(someVideoMode.resolution.width)")
+// Prints "The width of someVideoMode is now 1280"
+
+let vga = Resolution(width: 640, height: 480)
+
+
+Consider this example, which uses the Resolution structure from the previous example:
+
+
+let hd = Resolution(width: 1920, height: 1080)
+var cinema = hd
+
+
+cinema.width = 2048
+Checking the width property of cinema shows that it has indeed changed to be 2048:
+
+
+print("cinema is now \(cinema.width) pixels wide")
+
+
+// Prints "cinema is now 2048 pixels wide"
+However, the width property of the original hd instance still has the old value of 1920:
+
+
+print("hd is still \(hd.width) pixels wide")
+// Prints "hd is still 1920 pixels wide"
+
+let tenEighty = VideoMode()
+tenEighty.resolution = hd
+tenEighty.interlaced = true
+tenEighty.name = "1080i"
+tenEighty.frameRate = 25.0
+
+let alsoTenEighty = tenEighty
+alsoTenEighty.frameRate = 30.0
+
+print("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
+// Prints "The frameRate property of tenEighty is now 30.0"
+Note that tenEighty and alsoTenEighty are declared as constants, rather than variables. However, you can still change tenEighty.frameRate and alsoTenEighty.frameRate because the values of the tenEighty and alsoTenEighty constants themselves do not actually change. tenEighty and alsoTenEighty themselves do not “store” the VideoMode instance—instead, they both refer to a VideoMode instance behind the scenes. It is the frameRate property of the underlying VideoMode that is changed, not the values of the constant references to that VideoMode.
+
+ can sometimes be useful to find out if two constants or variables refer to exactly the same instance of a class. To enable this, Swift provides two identity operators:
+
+Identical to (===)
+Not identical to (!==)
+Use these operators to check whether two constants or variables refer to the same single instance:
+
+if tenEighty === alsoTenEighty {
+    print("tenEighty and alsoTenEighty refer to the same VideoMode instance.")
+}
+// Prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
+
